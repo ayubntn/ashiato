@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.7.11/dist/vue.js"></script>
+		<link rel="stylesheet" href="css/style.css">
+	</head>
+	<body>
+		<div class="wrapper">
+			<h1>だれのあしあと？</h1>
+			<p class="desc">わかったら、おしてみよう。</p>
+			<div id="app">
+				<ul class="ashiatoList">
+					<li v-for="n in 36" :key="n">
+						<card :number="n"></card>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<script type="text/x-template" id="card">
+			<div class="card" :class="stateClass" @click="toggle()">
+				<img :src="`images/ashiato${number}.jpg`" class="ashiato" />
+				<img :src="`images/image${number}.jpg`" class="image" />
+			</div>
+		</script>
+
+		<script>
+			Vue.component('card', {
+			template: '#card',
+			props: ['number'],
+			data() {
+				return {
+					opened: null
+				}
+			},
+			computed: {
+				stateClass() {
+					if (this.opened == null) {
+						return '';
+					} else {
+						return this.opened ? 'card_opened' : 'card_closed';
+					}
+				}
+			},
+			methods: {
+				toggle() {
+					this.opened = !this.opened;
+				}
+			}
+		});
+
+			var app = new Vue({
+				el: "#app",
+				data: {
+				
+				},
+				created() {
+					
+				},
+				methods: {
+					
+				},
+			});
+		</script>
+	</body>
+</html>
