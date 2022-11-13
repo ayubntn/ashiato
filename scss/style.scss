@@ -15,7 +15,7 @@ h1 {
 }
 
 .wrapper {
-    margin-bottom: 200px;
+    margin-bottom: 600px;
 }
 
 .desc {
@@ -74,6 +74,7 @@ $tern_time_base: 0.15s;
         bottom: 0;
         left: 50%;
         word-break: keep-all;
+        font-weight: bold;
     }
 
     img {
