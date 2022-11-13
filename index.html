@@ -6,7 +6,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Document</title>
 		<script src="https://cdn.jsdelivr.net/npm/vue@2.7.11/dist/vue.js"></script>
-		<link rel="stylesheet" href="css/style.css">
+		<script src="names.js"></script>
+		<link rel="stylesheet" href="css/style.css" />
 	</head>
 	<body>
 		<div class="wrapper">
@@ -15,7 +16,8 @@
 			<div id="app">
 				<ul class="ashiatoList">
 					<li v-for="n in 36" :key="n">
-						<card :number="n"></card>
+						<div class="ashiatoList_num">{{n}}</div>
+						<card :number="n" :names="names"></card>
 					</li>
 				</ul>
 			</div>
@@ -25,45 +27,43 @@
 			<div class="card" :class="stateClass" @click="toggle()">
 				<img :src="`images/ashiato${number}.jpg`" class="ashiato" />
 				<img :src="`images/image${number}.jpg`" class="image" />
+				<div class="card_name" v-if="opened != null">{{names[number - 1]}}</div>
 			</div>
 		</script>
 
 		<script>
-			Vue.component('card', {
-			template: '#card',
-			props: ['number'],
-			data() {
-				return {
-					opened: null
-				}
-			},
-			computed: {
-				stateClass() {
-					if (this.opened == null) {
-						return '';
-					} else {
-						return this.opened ? 'card_opened' : 'card_closed';
-					}
-				}
-			},
-			methods: {
-				toggle() {
-					this.opened = !this.opened;
-				}
-			}
-		});
+			Vue.component("card", {
+				template: "#card",
+				props: ["number", "names"],
+				data() {
+					return {
+						opened: null,
+					};
+				},
+				computed: {
+					stateClass() {
+						if (this.opened == null) {
+							return "";
+						} else {
+							return this.opened ? "card_opened" : "card_closed";
+						}
+					},
+				},
+				methods: {
+					toggle() {
+						this.opened = !this.opened;
+					},
+				},
+			});
 
 			var app = new Vue({
 				el: "#app",
 				data: {
-				
+					names: names
 				},
 				created() {
-					
 				},
-				methods: {
-					
-				},
+				methods: {},
 			});
 		</script>
 	</body>
